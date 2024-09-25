@@ -11,6 +11,8 @@ public class PacStuMove : MonoBehaviour
     private float dist = 1f;
     private int currentInd = 0;
     private float t = 0f;
+
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,8 @@ public class PacStuMove : MonoBehaviour
         };
         startPos = positions[0];
         targetPos = positions[currentInd];
+        
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -35,7 +39,17 @@ public class PacStuMove : MonoBehaviour
             startPos = transform.position;
             currentInd = (currentInd + 1) % positions.Length;
             targetPos = positions[currentInd];
+
+            Vector2 moveDirection = targetPos - startPos;
+
+            if(moveDirection.x != 0){
+            anim.SetFloat("Horiz", moveDirection.x);
+            anim.SetFloat("Vert", 0f);
         }
-        
+        else if (moveDirection.y != 0){
+            anim.SetFloat("Vert", moveDirection.y);
+            anim.SetFloat("Horiz", 0f);
+        }
+        }
     }
 }
