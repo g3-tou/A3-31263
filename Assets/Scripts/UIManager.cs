@@ -10,6 +10,20 @@ public class UIManager : MonoBehaviour
     public void LoadNextScene(){
         DontDestroyOnLoad(this);
         SceneManager.LoadScene("Assignment3");
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    public void QuitGame(){
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadScene(0);
+        //UnityEditor.EditorApplication.isPlaying = false;
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode){
+        if(scene.buildIndex == 1){
+            Button exit = GameObject.FindWithTag("QuitButton").GetComponent<Button>();
+            exit.onClick.AddListener(QuitGame);
+        }
     }
     // Start is called before the first frame update
     void Start()
