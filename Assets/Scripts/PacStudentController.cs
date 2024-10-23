@@ -12,6 +12,8 @@ public class PacStudentController : MonoBehaviour
     private float dist = 1f;
     private Animator anim;
     private bool isMoving = false; //is pacstu moving or not 
+    private Vector2 lastInput; //storing last input of pacstu
+    private Vector2 currentInput; //current input for pacstu
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,8 @@ public class PacStudentController : MonoBehaviour
         anim = GetComponent<Animator>();
         startPos = transform.position; //wherever pacstu is
         targetPos = startPos;
+        lastInput = Vector2.zero;
+        currentInput = Vector2.zero;
     }
 
     // Update is called once per frame
@@ -49,22 +53,31 @@ public class PacStudentController : MonoBehaviour
 
             if (moveDirection != Vector2.zero) //if the direction is not 0
             {
-                startPos = transform.position;
-                targetPos = startPos + moveDirection * dist; //essentially moves by 1 unit (so like from pellet to pellet.. kinda)
+                lastInput = moveDirection;
+                currentInput = lastInput; //makes the current input the last input 
+               /* startPos = transform.position;
+                targetPos = startPos + lastInput * dist; //essentially moves by 1 unit (so like from pellet to pellet.. kinda)
                 t = 0f;
-                isMoving = true;
+                isMoving = true;*/
+                //currentInput = lastInput; //makes the current input the last input 
 
                 // from PacStuMove
-                if (moveDirection.x != 0)
+                if (lastInput.x != 0)
                 {
-                    anim.SetFloat("Horiz", moveDirection.x);
+                    anim.SetFloat("Horiz", lastInput.x);
                     anim.SetFloat("Vert", 0f);
                 }
-                else if (moveDirection.y != 0)
+                else if (lastInput.y != 0)
                 {
-                    anim.SetFloat("Vert", moveDirection.y);
+                    anim.SetFloat("Vert", lastInput.y);
                     anim.SetFloat("Horiz", 0f);
                 }
+            }
+            if(!isMoving && currentInput != Vector2.zero){
+                startPos = transform.position;
+                targetPos = startPos + lastInput * dist; //essentially moves by 1 unit (so like from pellet to pellet.. kinda)
+                t = 0f;
+                isMoving = true;
             }
         }
 
