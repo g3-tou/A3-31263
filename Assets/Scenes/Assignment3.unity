@@ -2445,8 +2445,9 @@ GameObject:
   - component: {fileID: 1938132214}
   - component: {fileID: 1938132213}
   - component: {fileID: 1938132217}
+  - component: {fileID: 1938132218}
   m_Layer: 0
-  m_Name: PacStudentMove
+  m_Name: PacStudent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2640,6 +2641,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1938132218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938132212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5daa96b5b9ccc47a7af33dc90870e78d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1973274149
 PrefabInstance:
   m_ObjectHideFlags: 0
