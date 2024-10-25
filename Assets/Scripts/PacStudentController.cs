@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class PacStudentController : MonoBehaviour
 {
@@ -14,10 +13,7 @@ public class PacStudentController : MonoBehaviour
     private Animator anim;
     private bool isMoving = false; //is pacstu moving or not 
     private Vector2 lastInput; //storing last input of pacstu
-    private Vector2 currentInput; //current input for pacstu 
-    public Tilemap map;
-    public Tile pellets;
-    public Tile powerpellets;
+    private Vector2 currentInput; //current input for pacstu
 
     // Start is called before the first frame update
     void Start()
@@ -33,78 +29,69 @@ public class PacStudentController : MonoBehaviour
     //currently does not move all the way using lastInput etc, just by pressing the key 1 at a time.
     void Update()
     {
-        //if pacstu is not moving
-        if(!isMoving){
-            PacStuNotMoving();
-        }
-        //if pacstu is moving, lerp
-        if(isMoving){
-            PacStuIsMoving();
-        }
-    }
+        if (!isMoving) //if pacstu is not moving
+        {
+            Vector2 moveDirection = Vector2.zero; //no movement at the start of the frame 
 
-    void PacStuNotMoving(){
-        
-        Vector2 moveDirection = Vector2.zero; //no movement at the start of the frame 
-
-        //WASD input to set target position and to move in said position
-        if (Input.GetKey(KeyCode.W))
-        {
-            moveDirection = Vector2.up;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            moveDirection = Vector2.down;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            moveDirection = Vector2.left;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            moveDirection = Vector2.right;
-        }
-
-        if (moveDirection != Vector2.zero) //if the direction is not 0
-        {
-            lastInput = moveDirection;
-            currentInput = lastInput; //makes the current input the last input 
-            /* startPos = transform.position;
-            targetPos = startPos + lastInput * dist; //essentially moves by 1 unit (so like from pellet to pellet.. kinda)
-            t = 0f;
-            isMoving = true;*/
-            //currentInput = lastInput; //makes the current input the last input 
-
-            // from PacStuMove
-            if (currentInput.x != 0)
+            //WASD input to set target position and to move in said position
+            if (Input.GetKey(KeyCode.W))
             {
-                anim.SetFloat("Horiz", currentInput.x);
-                anim.SetFloat("Vert", 0f);
+                moveDirection = Vector2.up;
             }
-            else if (currentInput.y != 0)
+            if (Input.GetKey(KeyCode.S))
             {
-                anim.SetFloat("Vert", currentInput.y);
-                anim.SetFloat("Horiz", 0f);
+                moveDirection = Vector2.down;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveDirection = Vector2.left;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                moveDirection = Vector2.right;
+            }
+
+            if (moveDirection != Vector2.zero) //if the direction is not 0
+            {
+                lastInput = moveDirection;
+                currentInput = lastInput; //makes the current input the last input 
+               /* startPos = transform.position;
+                targetPos = startPos + lastInput * dist; //essentially moves by 1 unit (so like from pellet to pellet.. kinda)
+                t = 0f;
+                isMoving = true;*/
+                //currentInput = lastInput; //makes the current input the last input 
+
+                // from PacStuMove
+                if (lastInput.x != 0)
+                {
+                    anim.SetFloat("Horiz", lastInput.x);
+                    anim.SetFloat("Vert", 0f);
+                }
+                else if (lastInput.y != 0)
+                {
+                    anim.SetFloat("Vert", lastInput.y);
+                    anim.SetFloat("Horiz", 0f);
+                }
+            }
+            if(!isMoving && currentInput != Vector2.zero){
+                startPos = transform.position;
+                targetPos = startPos + lastInput * dist; //essentially moves by 1 unit (so like from pellet to pellet.. kinda)
+                t = 0f;
+                isMoving = true;
             }
         }
-        if(!isMoving && currentInput != Vector2.zero){
-            startPos = transform.position;
-            targetPos = startPos + lastInput * dist; //essentially moves by 1 unit (so like from pellet to pellet.. kinda)
-            t = 0f;
-            isMoving = true;
-        }
-    }
 
-    void PacStuIsMoving(){
-        
-        t += Time.deltaTime * speed / dist;
-        transform.position = Vector2.Lerp(startPos, targetPos, t);
-
-        if (t >= 1f) 
+        if (isMoving) //if pacstu is moving, lerp
         {
-            transform.position = targetPos;
-            isMoving = false;
-        }  
+            t += Time.deltaTime * speed / dist;
+            transform.position = Vector2.Lerp(startPos, targetPos, t);
+
+            if (t >= 1f) 
+            {
+                transform.position = targetPos;
+                isMoving = false;
+            }
+        }
     }
 }
 

@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - QuitButton
-  - Wall
   layers:
   - Default
   - TransparentFX
