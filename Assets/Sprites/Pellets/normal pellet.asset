@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: powerpellet
+  m_Name: normal pellet
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 1101891527, guid: 54157f983816e41c5916b9b1e6909417, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d019b7f25dfd2468a982b20dd9bb6e96, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
