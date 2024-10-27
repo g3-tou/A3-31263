@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1.2999878, y: -1.4000244}
+  m_AnchoredPosition: {x: 1.3000488, y: -1.4000244}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &32932821
@@ -1208,6 +1208,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 481784364}
   m_CullTransparentMesh: 1
+--- !u!1839735485 &482298694 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
+  m_PrefabInstance: {fileID: 1699606429}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &570786850 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4795706268225909695, guid: 75028f51355614ef69283862754d1c5a, type: 3}
@@ -1439,7 +1444,7 @@ GameObject:
   - component: {fileID: 938145583}
   m_Layer: 0
   m_Name: Pellets2
-  m_TagString: Untagged
+  m_TagString: Pellets
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2231,7 +2236,7 @@ GameObject:
   - component: {fileID: 1010428405}
   m_Layer: 0
   m_Name: Pellets4
-  m_TagString: Untagged
+  m_TagString: Pellets
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3020,6 +3025,11 @@ RectTransform:
   m_AnchoredPosition: {x: -0.02384758, y: -0.053233147}
   m_SizeDelta: {x: 0.9799, y: 1.6406}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1839735485 &1207906159 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
+  m_PrefabInstance: {fileID: 1973274149}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1237645590
 GameObject:
   m_ObjectHideFlags: 0
@@ -3083,7 +3093,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 14.750873
+  orthographic size: 15.1402025
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3507,6 +3517,16 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477112920}
   m_CullTransparentMesh: 1
+--- !u!1839735485 &1620261069 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
+  m_PrefabInstance: {fileID: 6421840136881749426}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1839735485 &1669486929 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
+  m_PrefabInstance: {fileID: 2006421656}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1699606429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3515,6 +3535,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2108747434201135938, guid: 75028f51355614ef69283862754d1c5a, type: 3}
+      propertyPath: m_Name
+      value: Walls2
+      objectReference: {fileID: 0}
     - target: {fileID: 2108747434201135938, guid: 75028f51355614ef69283862754d1c5a, type: 3}
       propertyPath: m_TagString
       value: Wall
@@ -7972,7 +7996,7 @@ Transform:
   m_GameObject: {fileID: 1938132212}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.48, y: 4, z: 0}
+  m_LocalPosition: {x: -5, y: 4, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8087,8 +8111,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5daa96b5b9ccc47a7af33dc90870e78d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallTilemaps:
+  - {fileID: 1620261069}
+  - {fileID: 482298694}
+  - {fileID: 1669486929}
+  - {fileID: 1207906159}
   map: {fileID: 0}
-  pellets: {fileID: 0}
+  pellets: {fileID: 11400000, guid: 03046694dc3a1447f86680357fc3c503, type: 2}
   powerpellets: {fileID: 0}
 --- !u!1001 &1973274149
 PrefabInstance:
@@ -8098,6 +8127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2108747434201135938, guid: 75028f51355614ef69283862754d1c5a, type: 3}
+      propertyPath: m_Name
+      value: Walls4
+      objectReference: {fileID: 0}
     - target: {fileID: 2108747434201135938, guid: 75028f51355614ef69283862754d1c5a, type: 3}
       propertyPath: m_TagString
       value: Wall
@@ -9327,9 +9360,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
-      propertyPath: m_TileSpriteArray.Array.data[5].m_Data
+      propertyPath: m_TileSpriteArray.Array.data[4].m_Data
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
+      propertyPath: m_TileSpriteArray.Array.data[5].m_Data
+      value: 
+      objectReference: {fileID: 21300000, guid: e214c4dedfd3145c890975998073a681, type: 3}
     - target: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
       propertyPath: m_Tiles.Array.data[0].second.m_TileIndex
       value: 4
@@ -9731,8 +9768,12 @@ PrefabInstance:
       value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
-      propertyPath: m_TileSpriteArray.Array.data[5].m_RefCount
+      propertyPath: m_TileSpriteArray.Array.data[4].m_RefCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
+      propertyPath: m_TileSpriteArray.Array.data[5].m_RefCount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
       propertyPath: m_Tiles.Array.data[100].second.m_TileIndex
@@ -11340,7 +11381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
       propertyPath: m_Tiles.Array.data[108].second.m_TileSpriteIndex
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
       propertyPath: m_Tiles.Array.data[109].second.m_TileMatrixIndex
@@ -12335,7 +12376,7 @@ GameObject:
   - component: {fileID: 1988841303}
   m_Layer: 0
   m_Name: Pellets
-  m_TagString: Untagged
+  m_TagString: Pellets
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12984,8 +13025,6 @@ Tilemap:
   m_TileSpriteArray:
   - m_RefCount: 55
     m_Data: {fileID: 21300000, guid: d019b7f25dfd2468a982b20dd9bb6e96, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 56
     m_Data:
@@ -13042,6 +13081,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2108747434201135938, guid: 75028f51355614ef69283862754d1c5a, type: 3}
+      propertyPath: m_Name
+      value: Walls3
+      objectReference: {fileID: 0}
     - target: {fileID: 2108747434201135938, guid: 75028f51355614ef69283862754d1c5a, type: 3}
       propertyPath: m_TagString
       value: Wall
@@ -17552,7 +17595,7 @@ GameObject:
   - component: {fileID: 2119595298}
   m_Layer: 0
   m_Name: Pellets3
-  m_TagString: Untagged
+  m_TagString: Pellets
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19563,6 +19606,10 @@ PrefabInstance:
     - target: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
       propertyPath: m_TileColorArray.Array.data[0].m_RefCount
       value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
+      propertyPath: m_TileObjectToInstantiateArray.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
       propertyPath: m_Tiles.Array.data[10].second.m_TileIndex
@@ -21887,14 +21934,14 @@ PrefabInstance:
     - target: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
       propertyPath: m_TileObjectToInstantiateArray.Array.data[0].m_Data
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 643570892576275319, guid: 461a05c761af24c27a727f073610f3f9, type: 3}
     - target: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
       propertyPath: m_TileObjectToInstantiateArray.Array.data[1].m_Data
       value: 
       objectReference: {fileID: 643570892576275319, guid: 461a05c761af24c27a727f073610f3f9, type: 3}
     - target: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
       propertyPath: m_TileObjectToInstantiateArray.Array.data[0].m_RefCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
       propertyPath: m_TileObjectToInstantiateArray.Array.data[1].m_RefCount
@@ -22090,7 +22137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
       propertyPath: m_Tiles.Array.data[87].second.m_TileObjectToInstantiateIndex
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7245720694698641005, guid: 75028f51355614ef69283862754d1c5a, type: 3}
       propertyPath: m_Tiles.Array.data[88].second.m_TileObjectToInstantiateIndex

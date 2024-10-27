@@ -15,6 +15,7 @@ public class PacStudentController : MonoBehaviour
     private bool isMoving = false; //is pacstu moving or not 
     private Vector2 lastInput; //storing last input of pacstu
     private Vector2 currentInput; //current input for pacstu 
+    public List<Tilemap> wallTilemaps;
     public Tilemap map;
     public Tile pellets;
     public Tile powerpellets;

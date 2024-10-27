@@ -6,6 +6,7 @@ TagManager:
   tags:
   - QuitButton
   - Wall
+  - Pellets
   layers:
   - Default
   - TransparentFX
