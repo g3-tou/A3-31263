@@ -54,28 +54,20 @@ public class PacStudentController : MonoBehaviour
     }
 
     void TryToMove(){
-        /*//Vector3Int targetGridPos = pelletTilemaps[0].WorldToCell((Vector2)transform.position + lastInput);
-        //Vector3Int targetGridPos = Vector3Int.zero;
-        //
-
-        
-            Vector3Int targetGridPos = pTilemap.WorldToCell((Vector2)transform.position + lastInput);
+        Vector3Int targetGridPos = pelletTilemaps[0].WorldToCell((Vector2)transform.position + lastInput);
             
             if(isWalkable(targetGridPos)){
                 currentInput = lastInput;
                 StartMovement(targetGridPos);
-                return;
             }
-        
-        
-            Vector3Int currentGridPos = pTilemap.WorldToCell((Vector2)transform.position + currentInput);
-
-            if(isWalkable(currentGridPos)){
-                StartMovement(currentGridPos);
-                return;
+            else{
+                Vector3Int currentGridPos = pelletTilemaps[0].WorldToCell((Vector2)transform.position + currentInput);
+                if(isWalkable(currentGridPos)){
+                    StartMovement(currentGridPos);
+                }
             }
-        */
-    }
+            
+    } 
 
     void StartMovement(Vector3Int targetGridPos){
         startPos = transform.position;
@@ -122,6 +114,7 @@ public class PacStudentController : MonoBehaviour
         //Debug.Log("No Wall at: " + gridPos);
         return true;
     }
+}
     /*void PacStuNotMoving(){
         
         Vector2 moveDirection = Vector2.zero; //no movement at the start of the frame 
@@ -198,5 +191,5 @@ public class PacStudentController : MonoBehaviour
         //Debug.Log("No Wall at: " + gridPos);
         return true;
     }*/
-} 
+
 
