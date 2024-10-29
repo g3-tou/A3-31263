@@ -54,19 +54,27 @@ public class PacStudentController : MonoBehaviour
     }
 
     void TryToMove(){
-        Vector3Int targetGridPos = pelletTilemaps[0].WorldToCell((Vector2)transform.position + lastInput);
+        /*//Vector3Int targetGridPos = pelletTilemaps[0].WorldToCell((Vector2)transform.position + lastInput);
+        //Vector3Int targetGridPos = Vector3Int.zero;
+        //
 
-        if(isWalkable(targetGridPos)){
-            currentInput = lastInput;
-            StartMovement(targetGridPos);
-        }
-        else{
-            Vector3Int currentGridPos = pelletTilemaps[0].WorldToCell((Vector2)transform.position + currentInput);
+        
+            Vector3Int targetGridPos = pTilemap.WorldToCell((Vector2)transform.position + lastInput);
+            
+            if(isWalkable(targetGridPos)){
+                currentInput = lastInput;
+                StartMovement(targetGridPos);
+                return;
+            }
+        
+        
+            Vector3Int currentGridPos = pTilemap.WorldToCell((Vector2)transform.position + currentInput);
 
             if(isWalkable(currentGridPos)){
                 StartMovement(currentGridPos);
+                return;
             }
-        }
+        */
     }
 
     void StartMovement(Vector3Int targetGridPos){
