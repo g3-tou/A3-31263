@@ -16,7 +16,7 @@ public class PacStudentController : MonoBehaviour
     private Vector2 lastInput; //storing last input of pacstu
     private Vector2 currentInput; //current input for pacstu 
     public List<Tilemap> wallTilemaps;
-    public Tilemap map;
+    public List<Tilemap> pelletTilemaps;
     public Tile pellets;
     public Tile powerpellets;
 
@@ -70,23 +70,31 @@ public class PacStudentController : MonoBehaviour
         {
             lastInput = moveDirection;
             currentInput = lastInput; //makes the current input the last input 
+            Vector3Int targetGridPos = pelletTilemaps[0].WorldToCell((Vector2)transform.position + lastInput);
+            //Debug.Log("Grid Position: " + targetGridPos);
             /* startPos = transform.position;
             targetPos = startPos + lastInput * dist; //essentially moves by 1 unit (so like from pellet to pellet.. kinda)
             t = 0f;
             isMoving = true;*/
             //currentInput = lastInput; //makes the current input the last input 
 
-            // from PacStuMove
-            if (currentInput.x != 0)
-            {
-                anim.SetFloat("Horiz", currentInput.x);
-                anim.SetFloat("Vert", 0f);
-            }
-            else if (currentInput.y != 0)
-            {
-                anim.SetFloat("Vert", currentInput.y);
-                anim.SetFloat("Horiz", 0f);
-            }
+            if(isWalkable(targetGridPos)){
+                /*startPos = transform.position;
+                targetPos = startPos + lastInput * dist; //essentially moves by 1 unit (so like from pellet to pellet.. kinda)
+                t = 0f;
+                isMoving = true;*/
+                // from PacStuMove
+                if (currentInput.x != 0)
+                {
+                    anim.SetFloat("Horiz", currentInput.x);
+                    anim.SetFloat("Vert", 0f);
+                }
+                else if (currentInput.y != 0)
+                {
+                    anim.SetFloat("Vert", currentInput.y);
+                    anim.SetFloat("Horiz", 0f);
+                }
+        }
         }
         if(!isMoving && currentInput != Vector2.zero){
             startPos = transform.position;
@@ -98,6 +106,12 @@ public class PacStudentController : MonoBehaviour
 
     void PacStuIsMoving(){
         
+        Vector3Int currentGridPos = wallTilemaps[0].WorldToCell(transform.position);
+        if(!isWalkable(currentGridPos)){
+            transform.position = lastInput;
+            isMoving = false;
+            return;
+        }
         t += Time.deltaTime * speed / dist;
         transform.position = Vector2.Lerp(startPos, targetPos, t);
 
@@ -106,6 +120,18 @@ public class PacStudentController : MonoBehaviour
             transform.position = targetPos;
             isMoving = false;
         }  
+    }
+
+    bool isWalkable(Vector3Int gridPos){
+        foreach(Tilemap tilemap in wallTilemaps){
+            TileBase tile = tilemap.GetTile(gridPos);
+            if(tile != null){
+                return false;
+                Debug.Log("Cannot go there");
+            }
+        }
+        Debug.Log("No Wall at: " + gridPos);
+        return true;
     }
 }
 

@@ -8116,7 +8116,11 @@ MonoBehaviour:
   - {fileID: 482298694}
   - {fileID: 1669486929}
   - {fileID: 1207906159}
-  map: {fileID: 0}
+  pelletTilemaps:
+  - {fileID: 1988841304}
+  - {fileID: 938145584}
+  - {fileID: 2119595299}
+  - {fileID: 1010428406}
   pellets: {fileID: 11400000, guid: 03046694dc3a1447f86680357fc3c503, type: 2}
   powerpellets: {fileID: 0}
 --- !u!1001 &1973274149
