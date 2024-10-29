@@ -36,35 +36,87 @@ public class PacStudentController : MonoBehaviour
     {
         //if pacstu is not moving
         if(!isMoving){
-            PacStuNotMoving();
+            PlayerInput();
+            TryToMove();
         }
         //if pacstu is moving, lerp
         if(isMoving){
-            PacStuIsMoving();
+            PacStuMove();
         }
     }
 
-    void PacStuNotMoving(){
+    void PlayerInput(){
+        //WASD input to set target position and to move in said position
+        if (Input.GetKey(KeyCode.W)) lastInput = Vector2.up;
+        if (Input.GetKey(KeyCode.S)) lastInput = Vector2.down;
+        if (Input.GetKey(KeyCode.A)) lastInput = Vector2.left;
+        if (Input.GetKey(KeyCode.D)) lastInput = Vector2.right; 
+    }
+
+    void TryToMove(){
+        Vector3Int targetGridPos = pelletTilemaps[0].WorldToCell((Vector2)transform.position + lastInput);
+
+        if(isWalkable(targetGridPos)){
+            currentInput = lastInput;
+            StartMovement(targetGridPos);
+        }
+        else{
+            Vector3Int currentGridPos = pelletTilemaps[0].WorldToCell((Vector2)transform.position + currentInput);
+
+            if(isWalkable(currentGridPos)){
+                StartMovement(currentGridPos);
+            }
+        }
+    }
+
+    void StartMovement(Vector3Int targetGridPos){
+        startPos = transform.position;
+        //targetPos = startPos + lastInput * dist; //essentially moves by 1 unit (so like from pellet to pellet.. kinda)
+        targetPos = pelletTilemaps[0].CellToWorld(targetGridPos) + new Vector3(0.5f, 0.5f, 0f);
+        t = 0f;
+        isMoving = true;
+
+        UpdateAnimationDirection();
+    }
+
+    void UpdateAnimationDirection(){
+        if (currentInput.x != 0)
+        {
+            anim.SetFloat("Horiz", currentInput.x);
+            anim.SetFloat("Vert", 0f);
+        }
+        else if (currentInput.y != 0)
+        {
+            anim.SetFloat("Vert", currentInput.y);
+            anim.SetFloat("Horiz", 0f);
+        }
+    }
+
+    void PacStuMove(){
+        t += Time.deltaTime * speed / dist;
+        transform.position = Vector2.Lerp(startPos, targetPos, t);
+
+        if (t >= 1f) 
+        {
+            transform.position = targetPos;
+            isMoving = false;
+        } 
+    }
+
+    bool isWalkable(Vector3Int gridPos){
+        foreach(Tilemap tilemap in wallTilemaps){
+            TileBase tile = tilemap.GetTile(gridPos);
+            if(tile != null){
+                return false;
+                //Debug.Log("Cannot go there");
+            }
+        }
+        //Debug.Log("No Wall at: " + gridPos);
+        return true;
+    }
+    /*void PacStuNotMoving(){
         
         Vector2 moveDirection = Vector2.zero; //no movement at the start of the frame 
-
-        //WASD input to set target position and to move in said position
-        if (Input.GetKey(KeyCode.W))
-        {
-            moveDirection = Vector2.up;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            moveDirection = Vector2.down;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            moveDirection = Vector2.left;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            moveDirection = Vector2.right;
-        }
 
         if (moveDirection != Vector2.zero) //if the direction is not 0
         {
@@ -76,14 +128,14 @@ public class PacStudentController : MonoBehaviour
             targetPos = startPos + lastInput * dist; //essentially moves by 1 unit (so like from pellet to pellet.. kinda)
             t = 0f;
             isMoving = true;*/
-            //currentInput = lastInput; //makes the current input the last input 
-
+            //currentInput = lastInput; //makes the current input the last input */
+/*
             if(isWalkable(targetGridPos)){
                 /*startPos = transform.position;
                 targetPos = startPos + lastInput * dist; //essentially moves by 1 unit (so like from pellet to pellet.. kinda)
                 t = 0f;
-                isMoving = true;*/
-                // from PacStuMove
+                isMoving = true;*/ 
+               /* // from PacStuMove
                 if (currentInput.x != 0)
                 {
                     anim.SetFloat("Horiz", currentInput.x);
@@ -94,7 +146,8 @@ public class PacStudentController : MonoBehaviour
                     anim.SetFloat("Vert", currentInput.y);
                     anim.SetFloat("Horiz", 0f);
                 }
-        }
+        }*/
+/*
         }
         if(!isMoving && currentInput != Vector2.zero){
             startPos = transform.position;
@@ -102,15 +155,19 @@ public class PacStudentController : MonoBehaviour
             t = 0f;
             isMoving = true;
         }
-    }
-
+    }*/ 
+/*
     void PacStuIsMoving(){
         
-        Vector3Int currentGridPos = wallTilemaps[0].WorldToCell(transform.position);
-        if(!isWalkable(currentGridPos)){
-            transform.position = lastInput;
+        Vector3Int currentGridPos = Vector3Int.zero;
+        
+        foreach(Tilemap tilemap in wallTilemaps){
+            currentGridPos = tilemap.WorldToCell(transform.position);
+            if(!isWalkable(currentGridPos)){
+            transform.position = currentInput;
             isMoving = false;
             return;
+        }
         }
         t += Time.deltaTime * speed / dist;
         transform.position = Vector2.Lerp(startPos, targetPos, t);
@@ -120,18 +177,18 @@ public class PacStudentController : MonoBehaviour
             transform.position = targetPos;
             isMoving = false;
         }  
-    }
+    }*/
 
-    bool isWalkable(Vector3Int gridPos){
+    /*bool isWalkable(Vector3Int gridPos){
         foreach(Tilemap tilemap in wallTilemaps){
             TileBase tile = tilemap.GetTile(gridPos);
             if(tile != null){
                 return false;
-                Debug.Log("Cannot go there");
+                //Debug.Log("Cannot go there");
             }
         }
-        Debug.Log("No Wall at: " + gridPos);
+        //Debug.Log("No Wall at: " + gridPos);
         return true;
-    }
-}
+    }*/
+} 
 
