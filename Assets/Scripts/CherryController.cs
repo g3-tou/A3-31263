@@ -10,7 +10,6 @@ public class CherryController : MonoBehaviour
     Vector3 startpos;
     Vector3 endpos;
     private GameObject cCherry;
-    private Coroutine coroutine;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +27,7 @@ public class CherryController : MonoBehaviour
     IEnumerator MakeCherry(){
         while (true)
         {
-            yield return new WaitForSeconds(12f);
+            yield return new WaitForSeconds(10f);
 
             if (cCherry == null)
             {
