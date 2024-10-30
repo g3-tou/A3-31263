@@ -10,6 +10,7 @@ public class CherryController : MonoBehaviour
     Vector3 startpos;
     Vector3 endpos;
     private GameObject cCherry;
+    private bool isMoving = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,22 +30,23 @@ public class CherryController : MonoBehaviour
         {
             yield return new WaitForSeconds(10f);
 
-            if (cCherry == null)
-            {
-                cCherry = Instantiate(cherry, startpos, Quaternion.identity);
-                StartCoroutine(MoveObject(cCherry));
-            }
+            cCherry = Instantiate(cherry, startpos, Quaternion.identity) as GameObject;
+            StartCoroutine(MoveObject(cCherry));
+            
         }
     }
 
     IEnumerator MoveObject(GameObject obj){
+        isMoving = true;
         while(obj != null && Vector3.Distance(obj.transform.position, endpos) > 0.1f){
             obj.transform.position = Vector3.MoveTowards(obj.transform.position, endpos, speed * Time.deltaTime);
             yield return null;
         }
         if(obj != null){
             Destroy(obj);
+            //cCherry = null;
         }
+        isMoving = false;
 
     }
 

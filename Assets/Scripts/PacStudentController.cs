@@ -16,14 +16,18 @@ public class PacStudentController : MonoBehaviour
     private Vector2 lastInput; //storing last input of pacstu
     private Vector2 currentInput; //current input for pacstu
     public List<Tilemap> wallTilemaps;
-    //public List<Tilemap> pelletTilemaps;
-    //public Tile pellets;
+    public List<Tilemap> pelletTilemaps;
+    public Tile pellets;
     //public Tile powerpellets;
+    public AudioClip pelletSFX;
+    public AudioClip moveSFX;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         startPos = transform.position; //wherever pacstu is
         targetPos = startPos;
         lastInput = Vector2.zero;
@@ -62,12 +66,14 @@ public class PacStudentController : MonoBehaviour
             if (isWalkable(nextPos)){
                 currentInput = lastInput;
                 StartMovement(direction);
+                MovementAudio(nextPos);
             }
         }
         else if (currentInput != Vector2.zero){
             nextPos = (Vector2)transform.position + currentInput;
             if (isWalkable(nextPos)){
                 StartMovement(currentInput);
+                MovementAudio(nextPos);
             }
         }
     }
@@ -78,6 +84,7 @@ public class PacStudentController : MonoBehaviour
         targetPos = (Vector2)transform.position + direction;
         t = 0f;
         isMoving = true;
+        audioSource.Stop();
 
         UpdateAnimationDirection();
     }
@@ -116,6 +123,28 @@ public class PacStudentController : MonoBehaviour
             }
         }
         return true;
+    }
+
+    void MovementAudio(Vector2 nextPos){
+        bool eatPellet = false;
+
+        foreach(var tilemap in pelletTilemaps){
+            Vector3Int gridPos = tilemap.WorldToCell(nextPos);
+            if(tilemap.GetTile(gridPos) != null){
+                eatPellet = true;
+                break;
+            }
+        }
+
+        if(eatPellet && audioSource.clip != pelletSFX){
+            audioSource.clip = pelletSFX;
+            audioSource.Play();
+        }
+
+        else if(!eatPellet && audioSource.clip != moveSFX){
+            audioSource.clip = moveSFX;
+            audioSource.Play();
+        }
     }
 }
 
