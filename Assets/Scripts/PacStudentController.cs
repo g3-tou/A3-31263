@@ -54,19 +54,20 @@ public class PacStudentController : MonoBehaviour
     }
 
     void TryToMove(){
-        Vector3Int targetGridPos = pelletTilemaps[0].WorldToCell((Vector2)transform.position + lastInput);
+            Vector3Int targetGridPos = pelletTilemaps[0].WorldToCell((Vector2)transform.position + lastInput);
             
             if(isWalkable(targetGridPos)){
                 currentInput = lastInput;
                 StartMovement(targetGridPos);
             }
-            else{
-                Vector3Int currentGridPos = pelletTilemaps[0].WorldToCell((Vector2)transform.position + currentInput);
-                if(isWalkable(currentGridPos)){
-                    StartMovement(currentGridPos);
-                }
+        
+
+        else{
+            Vector3Int currentGridPos = pelletTilemaps[0].WorldToCell((Vector2)transform.position + currentInput);
+            if(isWalkable(currentGridPos)){
+                StartMovement(currentGridPos);
             }
-            
+        }  
     } 
 
     void StartMovement(Vector3Int targetGridPos){
@@ -108,7 +109,7 @@ public class PacStudentController : MonoBehaviour
             TileBase tile = tilemap.GetTile(gridPos);
             if(tile != null){
                 return false;
-                //Debug.Log("Cannot go there");
+                Debug.Log("Cannot go there");
             }
         }
         //Debug.Log("No Wall at: " + gridPos);
