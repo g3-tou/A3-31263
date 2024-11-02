@@ -13,6 +13,7 @@ public class PacStudentController : MonoBehaviour
     //private float dist = 1f;
     private Animator anim;
     private bool isMoving = false; //is pacstu moving or not
+    private bool isPellet = false;
     private Vector2 lastInput; //storing last input of pacstu
     private Vector2 currentInput; //current input for pacstu
     public List<Tilemap> wallTilemaps;
@@ -66,8 +67,9 @@ public class PacStudentController : MonoBehaviour
         if (hit.collider == null){ 
             if (isWalkable(nextPos)){
                 currentInput = lastInput;
+                //isPellet = IsPellet(nextPos);
                 StartMovement(direction);
-                MovementAudio(nextPos);
+                //PacStuAudio();
                 if (!particles.activeSelf){
                     particles.SetActive(true);
                 }
@@ -76,8 +78,9 @@ public class PacStudentController : MonoBehaviour
         else if (currentInput != Vector2.zero){
             nextPos = (Vector2)transform.position + currentInput;
             if (isWalkable(nextPos)){
+                //isPellet = IsPellet(nextPos);
                 StartMovement(currentInput);
-                MovementAudio(nextPos);
+                //PacStuAudio();
             }
         }
     }
@@ -88,10 +91,10 @@ public class PacStudentController : MonoBehaviour
         targetPos = (Vector2)transform.position + direction;
         t = 0f;
         isMoving = true;
-
+        
+        PacStuMoveAudio();
         UpdateAnimationDirection();
         UpdateParticleDirection(direction);
-        audioSource.Stop();
     }
 
     void UpdateAnimationDirection(){
@@ -135,6 +138,7 @@ public class PacStudentController : MonoBehaviour
         {
             transform.position = targetPos;
             isMoving = false;
+            PacStuStopMoveAudio();
         }
     }
 
@@ -153,26 +157,42 @@ public class PacStudentController : MonoBehaviour
         return true;
     }
 
-    void MovementAudio(Vector2 nextPos){
-        bool eatPellet = false;
-
+    bool IsPellet(Vector2 position){
         foreach(var tilemap in pelletTilemaps){
-            Vector3Int gridPos = tilemap.WorldToCell(nextPos);
-            if(tilemap.GetTile(gridPos) != null){
-                eatPellet = true;
-                break;
+            Vector3Int gridPos = tilemap.WorldToCell(position);
+            if (tilemap.GetTile(gridPos) == pellets){
+                return true;
             }
         }
+        return false;
+    }
 
-        if(eatPellet && audioSource.clip != pelletSFX){
-            audioSource.clip = pelletSFX;
-            audioSource.Play();
+    void PacStuMoveAudio(){
+        /*if(isPellet){
+            if(!audioSource.isPlaying || audioSource.clip != pelletSFX){
+                audioSource.clip = pelletSFX;
+                audioSource.Play();
+            }
         }
+        else{
+            if(!audioSource.isPlaying || audioSource.clip != moveSFX){
+                audioSource.clip = moveSFX;
+                audioSource.Play();
+            }
+        }*/
+        if(!audioSource.isPlaying || audioSource.clip != moveSFX){
+                audioSource.clip = moveSFX;
+                audioSource.Play();
+        }
+    }
 
-        else if(!eatPellet && audioSource.clip != moveSFX){
-            audioSource.clip = moveSFX;
-            audioSource.Play();
-        }
+    void PacStuStopMoveAudio(){
+        audioSource.Stop();
+    }
+
+    void EatAudio(){
+        audioSource.clip = pelletSFX;
+        audioSource.Play();
     }
 }
 

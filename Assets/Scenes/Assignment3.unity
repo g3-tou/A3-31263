@@ -3046,7 +3046,6 @@ GameObject:
   - component: {fileID: 1237645593}
   - component: {fileID: 1237645592}
   - component: {fileID: 1237645591}
-  - component: {fileID: 1237645595}
   - component: {fileID: 1237645596}
   m_Layer: 0
   m_Name: Main Camera
@@ -3129,20 +3128,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1237645595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1237645590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6e71769eb800422ab8ebf9c9cbb618b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 1237645596}
-  introMusic: {fileID: 0}
 --- !u!82 &1237645596
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3153,13 +3138,13 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3c08868f83d504764af78869d2037015, type: 3}
+  m_Resource: {fileID: 8300000, guid: 3c08868f83d504764af78869d2037015, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -12985,10 +12970,10 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.27
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -13093,7 +13078,7 @@ MonoBehaviour:
   - {fileID: 1010428406}
   pellets: {fileID: 11400000, guid: 03046694dc3a1447f86680357fc3c503, type: 2}
   pelletSFX: {fileID: 8300000, guid: f132a71d050d746fdaacc076dbea8736, type: 3}
-  moveSFX: {fileID: 8300000, guid: 76455dcb66a9946a789847204874f9cf, type: 3}
+  moveSFX: {fileID: 8300000, guid: b01dbc27720c94749a87a2e826e95bf4, type: 3}
   particles: {fileID: 1675050339}
 --- !u!114 &1938132219
 MonoBehaviour:
