@@ -68,6 +68,9 @@ public class PacStudentController : MonoBehaviour
                 currentInput = lastInput;
                 StartMovement(direction);
                 MovementAudio(nextPos);
+                (if !particles.activeSelf){
+                    particles.SetActive(true);
+                }
             }
         }
         else if (currentInput != Vector2.zero){
@@ -91,13 +94,11 @@ public class PacStudentController : MonoBehaviour
     }
 
     void UpdateAnimationDirection(){
-        if (currentInput.x != 0)
-        {
+        if (currentInput.x != 0){
             anim.SetFloat("Horiz", currentInput.x);
             anim.SetFloat("Vert", 0f);
         }
-        else if (currentInput.y != 0)
-        {
+        else if (currentInput.y != 0){
             anim.SetFloat("Vert", currentInput.y);
             anim.SetFloat("Horiz", 0f);
         }
