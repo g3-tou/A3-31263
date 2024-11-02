@@ -68,7 +68,7 @@ public class PacStudentController : MonoBehaviour
                 currentInput = lastInput;
                 StartMovement(direction);
                 MovementAudio(nextPos);
-                (if !particles.activeSelf){
+                if (!particles.activeSelf){
                     particles.SetActive(true);
                 }
             }
@@ -88,9 +88,10 @@ public class PacStudentController : MonoBehaviour
         targetPos = (Vector2)transform.position + direction;
         t = 0f;
         isMoving = true;
-        audioSource.Stop();
 
         UpdateAnimationDirection();
+        UpdateParticleDirection(direction);
+        audioSource.Stop();
     }
 
     void UpdateAnimationDirection(){
@@ -101,6 +102,28 @@ public class PacStudentController : MonoBehaviour
         else if (currentInput.y != 0){
             anim.SetFloat("Vert", currentInput.y);
             anim.SetFloat("Horiz", 0f);
+        }
+    }
+
+    void UpdateParticleDirection(Vector2 direction){
+        if(direction == Vector2.up){
+            particles.transform.rotation = Quaternion.Euler(90, 0, 0); //particles go up
+            particles.transform.localPosition = new Vector3(0, 0.1f, 0);
+        }
+
+        if(direction == Vector2.left){
+            particles.transform.rotation = Quaternion.Euler(0, 90, 0); //particles go left
+            particles.transform.localPosition = new Vector3(-0.1f, 0, 0);
+        }
+
+        if(direction == Vector2.down){
+            particles.transform.rotation = Quaternion.Euler(-90, 0, 0); //particles go down
+            particles.transform.localPosition = new Vector3(0, -0.1f, 0);
+        }
+
+        if(direction == Vector2.right){
+            particles.transform.rotation = Quaternion.Euler(0, -90, 0); //particles go right
+            particles.transform.localPosition = new Vector3(0.1f, 0, 0);
         }
     }
 
@@ -121,6 +144,9 @@ public class PacStudentController : MonoBehaviour
         foreach (var tilemap in wallTilemaps){
             Vector3Int gridPos = tilemap.WorldToCell(position);
             if (tilemap.GetTile(gridPos) != null){
+                if (particles.activeSelf){
+                    particles.SetActive(false);
+                }
                 return false;
             }
         }
