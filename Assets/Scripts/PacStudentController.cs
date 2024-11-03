@@ -19,7 +19,7 @@ public class PacStudentController : MonoBehaviour
     public List<Tilemap> wallTilemaps;
     public List<Tilemap> pelletTilemaps;
     public Tile pellets;
-    //public Tile powerpellets;
+    public RuleTile powerpellets;
     public AudioClip pelletSFX;
     public AudioClip moveSFX;
     private AudioSource audioSource;
@@ -67,7 +67,7 @@ public class PacStudentController : MonoBehaviour
         if (hit.collider == null){ 
             if (isWalkable(nextPos)){
                 currentInput = lastInput;
-                //isPellet = IsPellet(nextPos);
+                isPellet = IsPellet(nextPos);
                 StartMovement(direction);
                 //PacStuAudio();
                 if (!particles.activeSelf){
@@ -78,7 +78,7 @@ public class PacStudentController : MonoBehaviour
         else if (currentInput != Vector2.zero){
             nextPos = (Vector2)transform.position + currentInput;
             if (isWalkable(nextPos)){
-                //isPellet = IsPellet(nextPos);
+                isPellet = IsPellet(nextPos);
                 StartMovement(currentInput);
                 //PacStuAudio();
             }
@@ -160,7 +160,8 @@ public class PacStudentController : MonoBehaviour
     bool IsPellet(Vector2 position){
         foreach(var tilemap in pelletTilemaps){
             Vector3Int gridPos = tilemap.WorldToCell(position);
-            if (tilemap.GetTile(gridPos) == pellets){
+            //checks if the next tile is a normal pellet OR a power pellet
+            if (tilemap.GetTile(gridPos) == pellets || tilemap.GetTile(gridPos) == powerpellets){
                 return true;
             }
         }
@@ -168,7 +169,7 @@ public class PacStudentController : MonoBehaviour
     }
 
     void PacStuMoveAudio(){
-        /*if(isPellet){
+        if(!isPellet){
             if(!audioSource.isPlaying || audioSource.clip != pelletSFX){
                 audioSource.clip = pelletSFX;
                 audioSource.Play();
@@ -179,20 +180,20 @@ public class PacStudentController : MonoBehaviour
                 audioSource.clip = moveSFX;
                 audioSource.Play();
             }
-        }*/
-        if(!audioSource.isPlaying || audioSource.clip != moveSFX){
+        }
+        /*if(!audioSource.isPlaying || audioSource.clip != moveSFX){
                 audioSource.clip = moveSFX;
                 audioSource.Play();
-        }
+        }*/
     }
 
     void PacStuStopMoveAudio(){
         audioSource.Stop();
     }
 
-    void EatAudio(){
+    /*void EatAudio(){
         audioSource.clip = pelletSFX;
         audioSource.Play();
-    }
+    }*/
 }
 

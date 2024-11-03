@@ -3144,7 +3144,7 @@ AudioSource:
   m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -13077,6 +13077,7 @@ MonoBehaviour:
   - {fileID: 2119595299}
   - {fileID: 1010428406}
   pellets: {fileID: 11400000, guid: 03046694dc3a1447f86680357fc3c503, type: 2}
+  powerpellets: {fileID: 11400000, guid: 7d2b71086464a4f348420751678eae5d, type: 2}
   pelletSFX: {fileID: 8300000, guid: f132a71d050d746fdaacc076dbea8736, type: 3}
   moveSFX: {fileID: 8300000, guid: b01dbc27720c94749a87a2e826e95bf4, type: 3}
   particles: {fileID: 1675050339}
@@ -13092,8 +13093,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db37918c2b024f529591e03d74729b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cherry: {fileID: 4684852524240269652, guid: 675c132fa219546fd95c6f26d7326bb0, type: 3}
-  speed: 5
+  cherryPrefab: {fileID: 4684852524240269652, guid: 675c132fa219546fd95c6f26d7326bb0, type: 3}
+  moveSpeed: 5
 --- !u!1001 &1973274149
 PrefabInstance:
   m_ObjectHideFlags: 0
