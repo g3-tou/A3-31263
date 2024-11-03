@@ -6,20 +6,24 @@ public class IntroToBgMusic : MonoBehaviour
 {
     public AudioSource audioSource;
     public AudioClip introMusic;
-    public AudioClip bgMusic;
-    public float duration = 5f;
+    //public AudioClip bgMusic;
+    private float duration = 3f;
     // Start is called before the first frame update
     void Start()
     {
         audioSource.clip = introMusic;
         audioSource.Play();
-        Invoke("PlayBgMusic", duration);
+        //Invoke("StopMusic", duration);
     }
 
     // Update is called once per frame
-    void PlayBgMusic()
+    /*void PlayBgMusic()
     {
         audioSource.clip = bgMusic;
         audioSource.Play();
+    }*/
+
+    void StopMusic(){
+        audioSource.Stop();
     }
 }
