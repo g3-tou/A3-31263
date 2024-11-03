@@ -69,7 +69,6 @@ public class PacStudentController : MonoBehaviour
                 currentInput = lastInput;
                 isPellet = IsPellet(nextPos);
                 StartMovement(direction);
-                //PacStuAudio();
                 if (!particles.activeSelf){
                     particles.SetActive(true);
                 }
@@ -80,7 +79,6 @@ public class PacStudentController : MonoBehaviour
             if (isWalkable(nextPos)){
                 isPellet = IsPellet(nextPos);
                 StartMovement(currentInput);
-                //PacStuAudio();
             }
         }
     }
@@ -160,7 +158,8 @@ public class PacStudentController : MonoBehaviour
     bool IsPellet(Vector2 position){
         foreach(var tilemap in pelletTilemaps){
             Vector3Int gridPos = tilemap.WorldToCell(position);
-            //checks if the next tile is a normal pellet OR a power pellet
+            //checks if the next tile is a normal pellet OR a power pellet 
+            //to check if the audio switches between the two, power pellet check can be removed or commented out
             if (tilemap.GetTile(gridPos) == pellets || tilemap.GetTile(gridPos) == powerpellets){
                 return true;
             }
@@ -169,31 +168,25 @@ public class PacStudentController : MonoBehaviour
     }
 
     void PacStuMoveAudio(){
+        //if it is the pellet, it does the pellet sound
         if(!isPellet){
             if(!audioSource.isPlaying || audioSource.clip != pelletSFX){
                 audioSource.clip = pelletSFX;
                 audioSource.Play();
             }
         }
+        //else, it does the walking sound
         else{
             if(!audioSource.isPlaying || audioSource.clip != moveSFX){
                 audioSource.clip = moveSFX;
                 audioSource.Play();
             }
         }
-        /*if(!audioSource.isPlaying || audioSource.clip != moveSFX){
-                audioSource.clip = moveSFX;
-                audioSource.Play();
-        }*/
     }
 
+    //found it easier to just put it here lol
     void PacStuStopMoveAudio(){
         audioSource.Stop();
     }
-
-    /*void EatAudio(){
-        audioSource.clip = pelletSFX;
-        audioSource.Play();
-    }*/
 }
 

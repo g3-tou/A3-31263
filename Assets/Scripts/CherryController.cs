@@ -53,7 +53,7 @@ public class CherryController : MonoBehaviour
         Vector3 direction = (centre - startpos).normalized;
         float disToEdge = Mathf.Max(Mathf.Abs(cam.orthographicSize / direction.y), Mathf.Abs(cam.orthographicSize * cam.aspect / direction.x));
 
-        return startpos + direction * disToEdge * 2;
+        return startpos + direction * disToEdge * 1.5f;
     }
 
     IEnumerator CherryMove(GameObject cherry, Vector3 startpos, Vector3 endpos){
@@ -63,7 +63,7 @@ public class CherryController : MonoBehaviour
             /*Debug.Log("cherry pos: " + cherry.transform.position);
             Debug.Log("end pos: " + endpos);*/
 
-            // Check if the cherry has reached the end position
+            //check if the cherry has reached the end position
             if (Vector3.Distance(cherry.transform.position, endpos) < 0.1f){
                 Destroy(cherry);
                 yield break;
