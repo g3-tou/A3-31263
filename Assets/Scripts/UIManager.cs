@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
 
     public void LoadNextScene(){
         DontDestroyOnLoad(this);
-        SceneManager.LoadScene("Assignment3");
+        SceneManager.LoadScene("Assignment4");
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 

@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScene.unity
     guid: dce73d58d0b18490f9bd38f2dc1f97f7
   - enabled: 1
-    path: Assets/Scenes/Assignment3.unity
+    path: Assets/Scenes/Assignment4.unity
     guid: 6a09b7d2780c54a5087d67fcd2500c00
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
